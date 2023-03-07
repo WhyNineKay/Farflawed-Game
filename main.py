@@ -1,4 +1,3 @@
-import debug
 import globs
 import config
 import pygame
@@ -45,8 +44,6 @@ class MainWindow:
         self.window.fill((0, 0, 0))
 
         self.game.draw(self.window)
-
-        debug.debugger.draw(self.window)
 
         pygame.display.flip()
 

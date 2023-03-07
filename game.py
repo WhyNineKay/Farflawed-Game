@@ -2,7 +2,6 @@ from pathlib import Path
 
 import globs
 from base import BaseElement
-from debug import debugger
 from entities.player import Player
 import pygame
 
@@ -26,17 +25,6 @@ class Game(BaseElement):
         for entity in self._entities:
             entity.update()
 
-        debugger.debug("playerVel",
-                       f"playervel: {self._player.velocity.x:.2f}, {self._player.velocity.y:.2f}")
-
-        debugger.debug("cameraOffset",
-                       f"cameraOffset: {globs.cameraOffset[0]:.2f}, {globs.cameraOffset[1]:.2f}"
-                       )
-
-        debugger.debug("deltaTime",
-                       f"deltaMs/deltaS: {globs.deltaMs:.2f}, {globs.deltaS:.5f}"
-                       )
-
     def draw(self, surface: pygame.Surface) -> None:
         chunk = self._map.get_chunk_from_pos(self._player.x, self._player.y)
 
@@ -56,7 +44,3 @@ class Game(BaseElement):
     def handle_event(self, event: pygame.event.Event) -> None:
         for entity in self._entities:
             entity.handle_event(event)
-
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_b:
-                debugger.toggle()
