@@ -75,6 +75,18 @@ class Player(Entity):
             futureRectX = self._rect.move(self._velocity.x * globs.deltaMs, 0)
             futureRectY = self._rect.move(0, self._velocity.y * globs.deltaMs)
 
+            """
+            This collision detection code works in non-camera offset games,
+            but in this case it does not work for some reason.
+            
+            useful variables:
+             - globs.cameraOffset  (tuple[int, int])
+             - self._rect          # player rect, is always at center of screen
+             - tile.rect           # tile rect, is automatically effected by cameraOffset
+            - futureRectX         # player rect, but moved by velocity.x
+            - futureRectY         # player rect, but moved by velocity.y
+            """
+
             tileRect: pygame.Rect = tile.rect.copy()  # already affected by cameraOffset
 
             if futureRectX.colliderect(tileRect):
